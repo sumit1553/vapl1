@@ -38,7 +38,7 @@ import {
 } from '@/lib/actions/order.actions2';
 
 
-import StripePayment from './stripe-payment';
+// import StripePayment from './stripe-payment';
 
 
 
@@ -46,13 +46,13 @@ const OrderDetailsTable = ({
   order,
   paypalClientId,
   isAdmin,
-  stripeClientSecret,
+  // stripeClientSecret,
 }: {
   // order: Omit<Order, 'paymentResult'>;
   order: any;
   paypalClientId: string;
   isAdmin: boolean;
-  stripeClientSecret: string | null;
+  // stripeClientSecret: string | null;
 }) => {
   const {
     id,
@@ -268,13 +268,13 @@ const PrintLoadingState = () => {
               )}
 
               {/* Stripe Payment */}
-              {!isPaid && paymentMethod === 'Stripe' && stripeClientSecret && (
+              {/* {!isPaid && paymentMethod === 'Stripe' && stripeClientSecret && (
                 <StripePayment
                   priceInCents={Number(order.totalPrice) * 100}
                   orderId={order.id}
                   clientSecret={stripeClientSecret}
                 />
-              )}
+              )} */}
 
               {/* Cash On Delivery */}
               {isAdmin && !isPaid && paymentMethod === 'CashOnDelivery' && (
