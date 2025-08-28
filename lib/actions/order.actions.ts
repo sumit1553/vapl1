@@ -1,6 +1,7 @@
 'use server';
 
-import { isRedirectError } from 'next/dist/client/components/redirect';
+// import { isRedirectError } from 'next/dist/client/components/redirect';
+
 // import { isRedirectError } from "next/navigation";
 // import { getRedirectError } from 'next/dist/client/components/redirect';
 
@@ -107,8 +108,12 @@ export async function createOrder() {
       message: 'Order created',
       redirectTo: `/order/${insertedOrderId}`,
     };
-  } catch (error) {
-    if (isRedirectError(error)) throw error;
+  } catch (error:any) {
+    if (error.message === 'NEXT_REDIRECT') { // Or a more robust check if available
+        throw error; // Re-throw to allow Next.js to handle the redirect
+      }
+
+    // if (isRedirectError(error)) throw error;
     // if (getRedirectError(error)) throw error;
     
     return { success: false, message: formatError(error) };
@@ -275,13 +280,13 @@ export async function updateOrderToPaid({
 
   if (!updatedOrder) throw new Error('Order not found');
 
-  sendPurchaseReceipt({
-    order: {
-      ...updatedOrder,
-      shippingAddress: updatedOrder.shippingAddress as ShippingAddress,
-      paymentResult: updatedOrder.paymentResult as PaymentResult,
-    },
-  });
+  // sendPurchaseReceipt({
+  //   order: {
+  //     ...updatedOrder,
+  //     shippingAddress: updatedOrder.shippingAddress as ShippingAddress,
+  //     paymentResult: updatedOrder.paymentResult as PaymentResult,
+  //   },
+  // });
 }
 
 // Get user's orders
