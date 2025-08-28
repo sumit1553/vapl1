@@ -1,0 +1,29 @@
+git init
+git add .
+git commit -m "first commit"
+git remote -v
+git remote add origin git@github.com:sumit1553/qv1.git
+git push -u origin master
+
+
+
+git commit -m "dsgsgsdgsg"
+git push
+
+
+
+
+
+
+
+
+git remote add origin git@github.com:sumit1553/blu.git
+
+git remote add origin git@github.com:sumit1553/blu1.git
+
+
+
+git remote remove origin
+git remote remove origin
+
+git push origin master --force

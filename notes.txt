@@ -1,0 +1,22 @@
+
+tools scrape 
+junglescout 
+
+
+LIPSAPACK
+https://www.amazon.in/s?srs=94698514031&rh=p_89%3ALISAPACK
+
+Shadcn ui
+https://motion-primitives.com/
+https://shadcnui-expansions.typeart.cc/docs
+
+
+https://github.com/Sridhar-FullStack-Dev/portfolio-1
+https://www.youtube.com/watch?v=QdoqC3Onigc
+
+
+affiliate       Affiliate   @relation(fields: [affilateId], references: [id], onDelete: Cascade) affilateId      String      @db.Uuid
+
+
+31fa86c1-61f6-47b6-a6e7-d48495af9c05
+cmbuggg0f0000ic0ggda0soy1
