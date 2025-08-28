@@ -40,7 +40,7 @@ const OrderDetailsPage = async (props: {
     return redirect('/unauthorized');
   }
 
-  let client_secret = null;
+  // let client_secret = null;
 
   
   // Check if is not paid and using stripe
