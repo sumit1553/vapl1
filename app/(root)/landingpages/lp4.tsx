@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ShoppingCart, Star, Droplets, Sparkles, Play, Pause, ChevronRight } from "lucide-react";
 import Image from 'next/image';
+import Link from "next/link";
 
 /**
  * Dossier-style perfume storefront in a single TSX file.
@@ -79,7 +80,21 @@ const products = [
 const Nav: React.FC = () => (
   <header className="sticky top-0 z-40 w-full backdrop-blur bg-white/70 border-b">
     <Container className="flex h-16 items-center justify-between">
-      <a href="#" className="text-xl font-bold tracking-tight">QV</a>
+      
+      {/* <a href="#" className="text-xl font-bold tracking-tight">QV</a> */}
+       <Link href='/' className='flex-start ml-4'>
+            <Image
+              src='/images/logo.svg'
+              alt='qvlogo'
+              height={48}
+              width={48}
+              priority={true}
+            />
+            {/* <span className='hidden lg:block font-bold text-2xl ml-3'>
+              QV
+            </span> */}
+          </Link>
+
       <nav className="hidden md:flex items-center gap-6 text-sm">
         <a href="#bestsellers" className="hover:opacity-70">Bestsellers</a>
         <a href="#moods" className="hover:opacity-70">Explore</a>
@@ -129,7 +144,7 @@ const ProductCard: React.FC<{p: typeof products[number]}> = ({ p }) => (
   <div className="group rounded-2xl border bg-white overflow-hidden shadow-sm hover:shadow-md transition">
     <div className="relative aspect-[4/5] overflow-hidden">
       {/* <img src={p.image} alt={p.name} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /> */}
-      <Image src={p.image} alt={p.name} className="h-full w-full object-cover transition duration-500 group-hover:scale-105"/>
+      <Image src={p.image} alt={p.name}  height='100' width='100' className="h-full w-full object-cover transition duration-500 group-hover:scale-105"/>
 
       <div className="absolute left-3 top-3">
         <Badge className="bg-white/90">Inspired by</Badge>
@@ -354,7 +369,7 @@ const DiscoverySet: React.FC = () => (
             {products.slice(0,3).map(p => (
               <div key={p.id} className="aspect-[3/4] rounded-xl overflow-hidden border">
                 {/* <img src={p.image} alt={p.name} className="h-full w-full object-cover"/> */}
-                <Image src={p.image} alt={p.name} className="h-full w-full object-cover"/>
+                <Image src={p.image} alt={p.name} width='100' height='100' className="h-full w-full object-cover"/>
               </div>
             ))}
             <div className="col-span-3 text-center text-sm text-zinc-600 pt-2">Add 2–5 minis to your set</div>
@@ -426,8 +441,8 @@ const Footer: React.FC = () => (
   <footer className="border-t py-10 bg-white">
     <Container className="grid md:grid-cols-4 gap-8 text-sm">
       <div>
-        <div className="text-xl font-bold">Scentory</div>
-        <p className="mt-2 text-zinc-600">Clean, conscious, and crafted to make you feel incredible.</p>
+        <div className="text-xl font-bold">QV Perfumes</div>
+        <p className="mt-2 text-zinc-600">Carry your confidence, wherever you go, Instant confidence & freshness in your pocket; Crafted to make you feel incredible.</p>
       </div>
       <div>
         <div className="font-semibold mb-2">Shop</div>
