@@ -1,0 +1,97 @@
+"use client";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+
+type Mood = {
+  name: string;
+  image: string;
+  tagline: string;
+  perfumes: { name: string; notes: string; }[];
+};
+
+const moods: Mood[] = [
+  {
+    name: "Beach",
+    image: "/images/beach.png",
+    tagline: "Fresh. Breezy. Ocean Escape.",
+    perfumes: [
+      { name: "Azure Mist", notes: "Citrus, Sea Salt, Musk" },
+      { name: "Ocean Drift", notes: "Bergamot, Marine, Amber" },
+    ],
+  },
+  {
+    name: "Garden",
+    image: "/images/garden.png",
+    tagline: "Bloom with Nature.",
+    perfumes: [
+      { name: "Floral Serenade", notes: "Rose, Jasmine, Sandalwood" },
+      { name: "Green Whisper", notes: "Herbs, Lily, Vetiver" },
+    ],
+  },
+  {
+    name: "Café",
+    image: "/images/cafe.png",
+    tagline: "Warm. Cozy. Romantic.",
+    perfumes: [
+      { name: "Vanilla Noir", notes: "Vanilla, Coffee, Patchouli" },
+      { name: "Spice Affair", notes: "Cinnamon, Clove, Tonka Bean" },
+    ],
+  },
+];
+
+export default function MoodExplorer() {
+  const [selectedMood, setSelectedMood] = useState<Mood | null>(null);
+
+  return (
+    // <div className="py-16 bg-black text-white">
+    <div className="py-16 bg-white text-black">
+      <h2 className="text-4xl font-bold text-center mb-10">Explore by Mood</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 max-w-6xl mx-auto">
+        {moods.map((mood, i) => (
+          <motion.div
+            key={i}
+            whileHover={{ scale: 1.05 }}
+            className="cursor-pointer"
+            onClick={() => setSelectedMood(mood)}
+          >
+            <Card className="relative overflow-hidden rounded-2xl shadow-lg">
+              <img
+                src={mood.image}
+                alt={mood.name}
+                className="w-full h-64 object-cover"
+              />
+              <CardContent className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center">
+                <h3 className="text-2xl font-semibold">{mood.name}</h3>
+                <p className="text-sm mt-2">{mood.tagline}</p>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Mood Modal */}
+      <Dialog open={!!selectedMood} onOpenChange={() => setSelectedMood(null)}>
+        <DialogContent className="bg-white text-black rounded-2xl p-6 max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold">
+              {selectedMood?.name} Mood Picks
+            </DialogTitle>
+          </DialogHeader>
+
+            <div className="mt-4 space-y-4">
+            {selectedMood?.perfumes.map((perfume, i) => (
+              <div key={i} className="p-3 border rounded-lg shadow-sm">
+                <h3 className="text-lg font-semibold">{perfume.name}</h3>
+                <p className="text-sm text-gray-600">Notes: {perfume.notes}</p>
+                <Button className="mt-2 w-full">Try Now</Button>
+            </div>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+}

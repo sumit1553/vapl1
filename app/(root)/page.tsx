@@ -8,6 +8,12 @@
 // import IconBoxes from '@/components/icon-boxes';
 // import DealCountdown from '@/components/deal-countdown';
 
+// import MoodExplorer from "./landingpages/landingpage1";
+// import MoodExplorer2 from "./landingpages/landingpage2";
+// import MoodExplorer3 from "./landingpages/lp3";
+
+import DossierStyleSite from "./landingpages/lp4";
+
 const Homepage = async () => {
   // const latestProducts = await getLatestProducts();
   // const featuredProducts = await getFeaturedProducts();
@@ -22,9 +28,18 @@ const Homepage = async () => {
       {/* <DealCountdown /> */}
       {/* <IconBoxes /> */}
 
-      <div>
+      {/* <div>
         root page
-      </div>
+      </div> */}
+
+      {/* <MoodExplorer /> */}
+
+      {/* <MoodExplorer2 /> */}
+
+      {/* <MoodExplorer3 /> */}
+
+      <DossierStyleSite />
+
     </>
   );
 };
