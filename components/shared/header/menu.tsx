@@ -32,6 +32,7 @@ const Menu = () => {
           <SheetTrigger className='align-middle'>
             <EllipsisVertical />
           </SheetTrigger>
+          
           <SheetContent className='flex flex-col items-start'>
             <SheetTitle>Menu</SheetTitle>
             <ModeToggle />
@@ -47,6 +48,7 @@ const Menu = () => {
           </SheetContent>
         </Sheet>
       </nav>
+
     </div>
   );
 };

@@ -2,9 +2,15 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { ShoppingCart, Star, Droplets, Sparkles, Play, Pause, ChevronRight } from "lucide-react";
+// import { ShoppingCart, Star, Droplets, Sparkles, Play, Pause, ChevronRight, SprayCan } from "lucide-react";
+import {  Star,  Sparkles, Play, Pause, ChevronRight, SprayCan } from "lucide-react";
+
 import Image from 'next/image';
-import Link from "next/link";
+// import Link from "next/link";
+// import ModeToggle from "@/components/shared/header/mode-toggle";
+// import Header2 from "@/components/header2";
+import LuxuryPerfumeSprayWithBottle from "./sprayperfume5";
+// import UserButton from "@/components/shared/header/user-button";
 
 /**
  * Dossier-style perfume storefront in a single TSX file.
@@ -77,58 +83,67 @@ const products = [
 // ];
 
 // ---------- Navbar ----------
-const Nav: React.FC = () => (
-  <header className="sticky top-0 z-40 w-full backdrop-blur bg-white/70 border-b">
-    <Container className="flex h-16 items-center justify-between">
-      
-      {/* <a href="#" className="text-xl font-bold tracking-tight">QV</a> */}
-       <Link href='/' className='flex-start ml-4'>
-            <Image
-              src='/images/logo.svg'
-              alt='qvlogo'
-              height={48}
-              width={48}
-              priority={true}
-            />
-            {/* <span className='hidden lg:block font-bold text-2xl ml-3'>
-              QV
-            </span> */}
-          </Link>
+// const Nav: React.FC = () => (
 
-      <nav className="hidden md:flex items-center gap-6 text-sm">
-        <a href="#bestsellers" className="hover:opacity-70">Bestsellers</a>
-        <a href="#moods" className="hover:opacity-70">Explore</a>
-        <a href="#discovery" className="hover:opacity-70">Discovery Set</a>
-        <a href="#values" className="hover:opacity-70">Our Values</a>
-        <a href="#reviews" className="hover:opacity-70">Reviews</a>
-      </nav>
-      <div className="flex items-center gap-3">
-        <Button variant="outline" className="hidden sm:inline-flex">Sign In</Button>
-        <Button className="inline-flex items-center gap-2"><ShoppingCart size={18}/> Cart</Button>
-      </div>
-    </Container>
-  </header>
-);
+  // <header className="sticky top-0 z-40 w-full backdrop-blur bg-white/70 border-b">
+  //   <Container className="flex h-16 items-center justify-between">
+      
+  //     {/* <a href="#" className="text-xl font-bold tracking-tight">QV</a> */}
+  //      <Link href='/' className='flex-start ml-4'>
+  //           <Image
+  //             src='/images/logo.svg'
+  //             alt='qvlogo'
+  //             height={48}
+  //             width={48}
+  //             priority={true}
+  //           />
+  //           {/* <span className='hidden lg:block font-bold text-2xl ml-3'>
+  //             QV
+  //           </span> */}
+  //         </Link>
+
+  //     <nav className="hidden md:flex items-center gap-6 text-sm">
+  //       <a href="#bestsellers" className="hover:opacity-70">Bestsellers</a>
+  //       <a href="#moods" className="hover:opacity-70">Explore</a>
+  //       <a href="#discovery" className="hover:opacity-70">Discovery Set</a>
+  //       <a href="#values" className="hover:opacity-70">Our Values</a>
+  //       <a href="#reviews" className="hover:opacity-70">Reviews</a>
+  //     </nav>
+  //     <div className="flex items-center gap-3">
+  //       {/* <ModeToggle /> */}
+  //       <Button variant="outline" className="hidden sm:inline-flex">Sign In</Button>
+  //       <Button className="inline-flex items-center gap-2"><ShoppingCart size={18}/> Cart</Button>
+  //       {/* <UserButton /> */}
+  //     </div>
+  //   </Container>
+  // </header>
+  
+// );
+
+
 
 // ---------- Hero with Cinematic Video ----------
 const Hero: React.FC = () => (
+  
   <section className="relative h-[86vh] w-full overflow-hidden">
     <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline>
       <source src="/videos/hero-cinematic.mp4" type="video/mp4" />
     </video>
+    
     <div className="absolute inset-0 bg-black/30" />
     <Container className="relative z-10 h-full flex flex-col justify-center text-white">
-      <motion.h1 initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.8}} className="max-w-2xl text-5xl md:text-6xl font-extrabold tracking-tight drop-shadow">
+      <motion.h1 initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.8}} className="max-w-2xl text-3xl md:text-4xl font-extrabold tracking-tight drop-shadow">
         One spray, instant confidence.
       </motion.h1>
       <motion.p initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.9, delay:0.1}} className="mt-4 max-w-xl text-lg md:text-xl text-white/90">
         Carry freshness & confidence with style
       </motion.p>
-      <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:1, delay:0.2}} className="mt-8 flex flex-wrap items-center gap-3">
+      
+      {/* <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:1, delay:0.2}} className="mt-8 flex flex-wrap items-center gap-3">
         <Button as="a" href="#bestsellers">Shop Bestsellers</Button>
         <Button as="a" href="#moods" variant="outline" className="backdrop-blur bg-white/10 border-white text-white">Explore by Mood</Button>
          <Button as="a" href="#discovery" variant="outline" className="backdrop-blur bg-white/10 border-white text-white">Build Discovery Set</Button>
-      </motion.div>
+      </motion.div> */}
 
       <div className="mt-6 flex items-center gap-3 text-sm">
         <Badge className="bg-grey">Long Lasting</Badge>
@@ -138,6 +153,61 @@ const Hero: React.FC = () => (
     </Container>
   </section>
 );
+
+
+// ---------- Intro Video ----------
+// const Introvideo: React.FC = () => (
+  
+//   <section id="introvideo" className="py-10 relative h-[86vh] w-full overflow-hidden">
+//     <Container>
+//       <div className="flex items-end justify-between mb-8">
+//         <h2 className="text-3xl md:text-4xl font-bold">Intro Video</h2>
+        
+//       </div>
+//       <div>
+//         <video className="absolute  h-full w-full object-cover"  autoPlay muted  playsInline>
+//           <source src="/videos/testintro.mp4" type="video/mp4" />
+//         </video>
+
+//       </div>  
+//     </Container>
+//   </section>
+// );
+
+
+
+
+// ---------- Navigation  ----------
+const Navigator: React.FC = () => (
+  // className="relative h-[86vh] w-full overflow-hidden"
+  <section id="navigator" className="py-10 relative h-[86vh] w-full overflow-hidden">
+    <Container>
+      <div className="flex items-end justify-between mb-8">
+        <h2 className="text-3xl md:text-4xl font-bold">Navigation</h2>
+        {/* <a href="#" className="text-sm underline underline-offset-4">View all</a> */}
+      
+      </div>
+
+      <div>
+        <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:1, delay:0.2}} className="mt-8 flex flex-wrap items-center gap-3">
+        <Button as="a" href="#bestsellers">Shop Bestsellers</Button>
+        <Button as="a" href="#moods"  className="backdrop-blur bg-grey/10 border-white text-white">Explore by Mood</Button>
+         <Button as="a" href="#discovery"  className="backdrop-blur bg-grey/10 border-white text-white">Build Discovery Set</Button>
+      </motion.div>
+        
+
+      </div>
+
+
+       
+    </Container>
+
+    
+  </section>
+);
+
+
+
 
 // ---------- Product Card ----------
 const ProductCard: React.FC<{p: typeof products[number]}> = ({ p }) => (
@@ -164,11 +234,14 @@ const ProductCard: React.FC<{p: typeof products[number]}> = ({ p }) => (
       <p className="mt-2 text-sm text-zinc-600">{p.notes}</p>
       <div className="mt-4 flex items-center justify-between">
         <span className="text-lg font-bold">₹{p.price}</span>
-        <Button className="inline-flex items-center gap-2"><Droplets size={16}/> Add</Button>
+        {/* <Button className="inline-flex items-center gap-2"><Droplets size={16}/> Add</Button> */}
+        <Button className="inline-flex items-center gap-2"><SprayCan size={16}/> Add</Button>
       </div>
     </div>
   </div>
 );
+
+
 
 // ---------- Bestsellers ----------
 const Bestsellers: React.FC = () => (
@@ -475,8 +548,11 @@ const Footer: React.FC = () => (
 export default function DossierStyleSite() {
   return (
     <main className="min-h-screen bg-white text-zinc-900">
-      <Nav />
+      {/* <Nav /> */}
       <Hero />
+      <LuxuryPerfumeSprayWithBottle />
+      {/* <Introvideo /> */}
+      <Navigator />
       <Bestsellers />
       <MoodExplorer />
       <DiscoverySet />

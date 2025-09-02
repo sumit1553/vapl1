@@ -1,0 +1,10 @@
+text.split(" ")
+
+
+let text = "Hi from Aff123456";
+let affid = text.substring(8, 17);
+
+{{ $('WhatsApp Trigger').item.json.messages[0].text.body }}
+
+
+{{ $json.messages[0].text.body }}
