@@ -1,35 +1,50 @@
 import { Metadata } from 'next';
-// import { notFound } from 'next/navigation';
-
-// import { getUserById } from '@/lib/actions/user.actions';
-// import UpdateAffiliate2Form from './update-affiliate2-form';
-// import { requireAdmin } from '@/lib/auth-guard';
 import { getAffilateById } from '@/lib/actions/affiliate2.actions';
+
+// import {
+//   getLatestProducts,
+//   getFeaturedProducts,
+// } from '@/lib/actions/product.actions';
 
 
 import {
-  getLatestProducts,
-  getFeaturedProducts,
+  getLatestProducts
 } from '@/lib/actions/product.actions';
 
+// import ProductCarousel from './allyComponents/product/product-carousel';
 
-import ProductCarousel from './allyComponents/product/product-carousel';
-
-
+// import DossierStyleSite from "./landingpages/lp4";
 
 // import ViewAllProductsButton from './allyComponents/view-all-products-button';
-
 // import IconBoxes from '@/components/icon-boxes';
 // import DealCountdown from '@/components/deal-countdown';
 
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+// import { Button } from '@/components/ui/button';
+// import Link from 'next/link';
 import { Affiliate } from '@/types';
-import ProductList2 from './allyComponents/product/product-list2';
+// import ProductList2 from './allyComponents/product/product-list2';
+
+
+import LuxuryPerfumeSprayWithBottle from "./landingpages/sprayperfume5";
+import Hero from './landingpages/Hero';
+import Navigator from './landingpages/Navigator';
+// import Bestsellers from './landingpages/Bestsellers';
+import DiscoverySet from './landingpages/DiscoverySet';
+import Values from './landingpages/Values';
+import Footer from './landingpages/Footer';
+import ProductList3 from './allyComponents/product/product-list3';
+import MoodExplorer from './landingpages/MoodExplorer';
+
+
+
+
 
 export const metadata: Metadata = {
   title: 'Affilate',
 };
+
+
+
 
 const AffiliateShopPage = async (props: {
   params: Promise<{
@@ -48,36 +63,45 @@ const AffiliateShopPage = async (props: {
 
 
   const latestProducts = await getLatestProducts();
-  const featuredProducts = await getFeaturedProducts();
+  // const featuredProducts = await getFeaturedProducts();
 
 
   return (
    <>
       
-      {featuredProducts.length > 0 && (
+      {/* <DossierStyleSite /> */}
+
+      <main className="min-h-screen bg-white text-zinc-900">
+            {/* <Nav /> */}
+            <Hero />
+            <LuxuryPerfumeSprayWithBottle />
+            {/* <Introvideo /> */}
+            <Navigator />
+            <ProductList3 data={latestProducts} partnerId={affiliate.id} limit={4}  />
+            {/* <Bestsellers /> */}
+            <MoodExplorer />
+            <DiscoverySet />
+            <Values />
+            {/* <Reviews /> */}
+            <Footer />
+          </main>
+
+
+
+
+      {/* {featuredProducts.length > 0 && (
         <ProductCarousel data={featuredProducts} />
-      )}
-      
-      
+      )} */}   
 
-      <ProductList2 data={latestProducts} partnerId={affiliate.id} limit={4}  />
-
-      
-
+      {/* <ProductList2 data={latestProducts} partnerId={affiliate.id} limit={4}  />
        <div className='flex justify-center items-center my-8'>
       <Button asChild className='px-8 py-4 text-lg font-semibold'>
-        {/* <Link href='/search'>View All Products Aff</Link> */}
         <Link href={`${affiliate.id}/search`}>View All Perfumeszz</Link>
       </Button>
-    </div>
-
+      </div> */}
 
       {/* <ViewAllProductsButton /> */}
-
-
-
       {/* <DealCountdown /> */}
-
       {/* <IconBoxes /> */}
     </>
   );

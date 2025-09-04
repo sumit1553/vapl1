@@ -2,14 +2,11 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-// import { ShoppingCart, Star, Droplets, Sparkles, Play, Pause, ChevronRight, SprayCan } from "lucide-react";
-import {  Star,  Sparkles, Play, Pause, ChevronRight, SprayCan } from "lucide-react";
-
+import { ShoppingCart, Star, Droplets, Sparkles, Play, Pause, ChevronRight, SprayCan } from "lucide-react";
 import Image from 'next/image';
-// import Link from "next/link";
-// import ModeToggle from "@/components/shared/header/mode-toggle";
-// import Header2 from "@/components/header2";
-import LuxuryPerfumeSprayWithBottle from "./sprayperfume5";
+import Link from "next/link";
+import ModeToggle from "@/components/shared/header/mode-toggle";
+import Header2 from "@/components/header2";
 // import UserButton from "@/components/shared/header/user-button";
 
 /**
@@ -120,99 +117,40 @@ const products = [
   
 // );
 
-
-
 // ---------- Hero with Cinematic Video ----------
 const Hero: React.FC = () => (
-  
   <section className="relative h-[86vh] w-full overflow-hidden">
     <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline>
       <source src="/videos/hero-cinematic.mp4" type="video/mp4" />
     </video>
-    
     <div className="absolute inset-0 bg-black/30" />
     <Container className="relative z-10 h-full flex flex-col justify-center text-white">
-      <motion.h1 initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.8}} className="max-w-2xl text-3xl md:text-4xl font-extrabold tracking-tight drop-shadow">
+      <motion.h1 initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.8}} className="max-w-2xl text-5xl md:text-6xl font-extrabold tracking-tight drop-shadow">
         One spray, instant confidence.
       </motion.h1>
       <motion.p initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.9, delay:0.1}} className="mt-4 max-w-xl text-lg md:text-xl text-white/90">
         Carry freshness & confidence with style
       </motion.p>
-      
-      {/* <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:1, delay:0.2}} className="mt-8 flex flex-wrap items-center gap-3">
+      <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:1, delay:0.2}} className="mt-8 flex flex-wrap items-center gap-3">
         <Button as="a" href="#bestsellers">Shop Bestsellers</Button>
         <Button as="a" href="#moods" variant="outline" className="backdrop-blur bg-white/10 border-white text-white">Explore by Mood</Button>
          <Button as="a" href="#discovery" variant="outline" className="backdrop-blur bg-white/10 border-white text-white">Build Discovery Set</Button>
-      </motion.div> */}
+      </motion.div>
 
       <div className="mt-6 flex items-center gap-3 text-sm">
         <Badge className="bg-grey">Long Lasting</Badge>
         <Badge className="bg-black">Oil Based</Badge>
-        <Badge className="bg-grey">Pocket Friendly</Badge>
+        <Badge className="bg-grey">Fair Priced</Badge>
       </div>
     </Container>
   </section>
 );
-
-
-// ---------- Intro Video ----------
-// const Introvideo: React.FC = () => (
-  
-//   <section id="introvideo" className="py-10 relative h-[86vh] w-full overflow-hidden">
-//     <Container>
-//       <div className="flex items-end justify-between mb-8">
-//         <h2 className="text-3xl md:text-4xl font-bold">Intro Video</h2>
-        
-//       </div>
-//       <div>
-//         <video className="absolute  h-full w-full object-cover"  autoPlay muted  playsInline>
-//           <source src="/videos/testintro.mp4" type="video/mp4" />
-//         </video>
-
-//       </div>  
-//     </Container>
-//   </section>
-// );
-
-
-
-
-// ---------- Navigation  ----------
-const Navigator: React.FC = () => (
-  // className="relative h-[86vh] w-full overflow-hidden"
-  <section id="navigator" className="py-10 relative h-[86vh] w-full overflow-hidden">
-    <Container>
-      <div className="flex items-end justify-between mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold">Navigation</h2>
-        {/* <a href="#" className="text-sm underline underline-offset-4">View all</a> */}
-      </div>
-
-      <div>
-        <motion.div initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:1, delay:0.2}} className="mt-8 flex flex-wrap items-center gap-3">
-        <Button as="a" href="#bestsellers">Shop Bestsellers</Button>
-        <Button as="a" href="#moods"  className="backdrop-blur bg-grey/10 border-white text-white">Explore by Mood</Button>
-         <Button as="a" href="#discovery"  className="backdrop-blur bg-grey/10 border-white text-white">Build Discovery Set</Button>
-      </motion.div>
-        
-
-      </div>
-
-
-       
-    </Container>
-
-    
-  </section>
-);
-
-
-
 
 // ---------- Product Card ----------
 const ProductCard: React.FC<{p: typeof products[number]}> = ({ p }) => (
   <div className="group rounded-2xl border bg-white overflow-hidden shadow-sm hover:shadow-md transition">
     <div className="relative aspect-[4/5] overflow-hidden">
-
+      {/* <img src={p.image} alt={p.name} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /> */}
       <Image src={p.image} alt={p.name}  height='100' width='100' className="h-full w-full object-cover transition duration-500 group-hover:scale-105"/>
 
       <div className="absolute left-3 top-3">
@@ -240,6 +178,33 @@ const ProductCard: React.FC<{p: typeof products[number]}> = ({ p }) => (
   </div>
 );
 
+
+// ---------- Intro Video ----------
+const Introvideo: React.FC = () => (
+  // className="relative h-[86vh] w-full overflow-hidden"
+  <section id="introvideo" className="py-16 bg-zinc-50">
+    <Container>
+      <div className="flex items-end justify-between mb-8">
+        <h2 className="text-3xl md:text-4xl font-bold">Intro Video</h2>
+        {/* <a href="#" className="text-sm underline underline-offset-4">View all</a> */}
+      </div>
+      <div>
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"> */}
+        {/* {products.map((p) => (
+          <motion.div key={p.id} initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.5}}>
+            <ProductCard p={p} />
+          </motion.div>
+        ))} */}
+        {/* <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline>
+          <source src="/videos/hero-cinematic.mp4" type="video/mp4" />
+        </video> */}
+
+
+
+      </div>
+    </Container>
+  </section>
+);
 
 
 // ---------- Bestsellers ----------
@@ -549,9 +514,7 @@ export default function DossierStyleSite() {
     <main className="min-h-screen bg-white text-zinc-900">
       {/* <Nav /> */}
       <Hero />
-      <LuxuryPerfumeSprayWithBottle />
-      {/* <Introvideo /> */}
-      <Navigator />
+      <Introvideo />
       <Bestsellers />
       <MoodExplorer />
       <DiscoverySet />

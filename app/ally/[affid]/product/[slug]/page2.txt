@@ -1,0 +1,222 @@
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
+import { getProductBySlug } from '@/lib/actions/product.actions';
+import { notFound } from 'next/navigation';
+
+// import ProductPrice from '@/components/shared/product/product-price';
+// import ProductImages from '@/components/shared/product/product-images';
+// import AddToCart from '@/components/shared/product/add-to-cart';
+// import Rating from '@/components/shared/product/rating';
+
+import ProductPrice from '../../allyComponents/product/product-price';
+import ProductImages from '../../allyComponents/product/product-images';
+import AddToCart from '../../allyComponents/product/add-to-cart';
+import Rating from '../../allyComponents/product/rating';
+
+import {  getMyCart2 } from '@/lib/actions/cart.actions';
+import ReviewList from './review-list';
+import { auth } from '@/auth';
+import { Button } from '@/components/ui/button';
+import ImageSlider from '../../allyComponents/product/bottleSlider1';
+import { getSelectedImage } from '@/lib/actions/selectBottle';
+import Image from 'next/image';
+import { Star } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+
+
+
+const ProductDetailsPage = async (props: {
+  params: Promise<{ slug: string, affid:string }>;
+}) => {
+  const { slug, affid } = await props.params;
+  
+  // console.log('add2cart-param', affid, typeof(affid))
+
+  const product = await getProductBySlug(slug);
+  if (!product) notFound();
+
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  // const cart = await getMyCart();
+  const cart = await getMyCart2(affid);
+// console.log('CART',cart)
+
+const selected = getSelectedImage();
+
+const images = [
+    { src: "/images/bottlesimgs/b1.jpeg", alt: "Perfume 1" },
+    { src: "/images/bottlesimgs/b2.jpeg", alt: "Perfume 2" },
+    { src: "/images/bottlesimgs/b3.jpeg", alt: "Perfume 3" },
+    { src: "/images/bottlesimgs/b4.jpeg", alt: "Perfume 4" },
+    { src: "/images/bottlesimgs/b5.jpeg", alt: "Perfume 5" },
+    { src: "/images/bottlesimgs/b6.jpeg", alt: "Perfume 6" },
+    { src: "/images/bottlesimgs/b7.jpeg", alt: "Perfume 7" },
+    { src: "/images/bottlesimgs/b8.jpeg", alt: "Perfume 8" },
+  ];
+
+
+
+
+  return (
+    
+    <div className="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-2 gap-10">
+      {/* Left Side - Product Image */}
+      <div>
+            <div className="relative w-full h-[400px] rounded-xl shadow-md overflow-hidden">
+              <Image
+                src={product.images[0]}
+                alt={product.name}
+                fill
+                className="object-contain"
+              />
+            </div>
+
+            {/* Thumbnail */}
+            <div className="flex gap-3 mt-4">
+              {product.images.map((img, idx) => (
+                <div
+                  key={idx}
+                  className={`relative w-20 h-20 border rounded-lg overflow-hidden cursor-pointer ${
+                    idx === 0 ? "ring-2 ring-orange-500" : ""
+                  }`}
+                >
+                  <Image src={product.images[0]} alt={product.name} fill className="object-cover" />
+                </div>
+              ))}
+            </div>
+      </div>
+
+
+      {/* Right Side - Product Info */}
+      <div>
+        <h3 className="text-gray-500">{product.brand}</h3>
+        <h1 className="text-3xl font-bold">{product.name}</h1>
+
+        {/* Rating */}
+        <div className="flex items-center gap-2 mt-2">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} size={18} className="text-yellow-400" />
+          ))}
+          <span className="text-gray-600 text-sm">
+            {/* {product.reviews} reviews */}
+            reviews
+          </span>
+        </div>
+
+        {/* Volume Badge */}
+        <span className="mt-3 inline-block bg-gray-200 text-gray-700 text-sm px-3 py-1 rounded-full">
+          {/* {product.volume} */} 10 ml
+        </span>
+
+        {/* Bottle Slider */}
+        <div className="mt-6">
+          <h2 className="text-lg font-semibold mb-2">Choose Your Bottle</h2>
+          <div className="relative w-full h-72 overflow-hidden rounded-xl shadow-md">
+            {/* <AnimatePresence mode="wait"> */}
+              <ImageSlider images={images} />
+              {/* <motion.div
+                key={current}
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -100 }}
+                transition={{ duration: 0.5 }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <Image
+                  src={product.bottles[current].src}
+                  alt={product.bottles[current].alt}
+                  fill
+                  className="object-contain"
+                />
+
+                
+                <button
+                  onClick={() => setSelectedBottle(product.bottles[current].src)}
+                  className={`absolute bottom-4 right-4 px-4 py-2 rounded-lg shadow-md transition ${
+                    selectedBottle === product.bottles[current].src
+                      ? "bg-green-600 text-white"
+                      : "bg-blue-600 text-white hover:bg-blue-700"
+                  }`}
+                >
+                  {selectedBottle === product.bottles[current].src
+                    ? "Selected ✓"
+                    : "Select"}
+                </button>
+              </motion.div> */}
+            {/* </AnimatePresence> */}
+          </div>
+
+          {/* Slider Nav */}
+          <div className="flex justify-between w-full mt-4 px-2">
+            <button
+              // onClick={prevSlide}
+              className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300"
+            >
+              ◀ Prev
+            </button>
+            <button
+              // onClick={nextSlide}
+              className="px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300"
+            >
+              Next ▶
+            </button>
+          </div>
+        </div>
+
+        {/* Selected Preview */}
+        {/* <div className="mt-6">
+          <h2 className="text-lg font-semibold mb-2">Your Selection</h2>
+          {selectedBottle ? (
+            <div className="relative w-40 h-56 rounded-xl overflow-hidden shadow">
+              <Image
+                src={selectedBottle}
+                alt="Selected Bottle"
+                fill
+                className="object-cover"
+              />
+            </div>
+          ) : (
+            <p className="text-gray-500">No bottle selected</p>
+          )}
+        </div> */}
+
+        {/* Price & Stock */}
+        <div className="mt-6 flex items-center justify-between">
+          <div>
+            <p className="text-2xl font-bold">₹{product.price}.00</p>
+            {/* <span
+              className={`inline-block text-sm mt-1 px-3 py-1 rounded-full ${
+                product.inStock
+                  ? "bg-green-100 text-green-600"
+                  : "bg-red-100 text-red-600"
+              }`}
+            >
+              {product.inStock ? "In Stock" : "Out of Stock"}
+            </span> */}
+          </div>
+          <button
+            // disabled={!product.inStock}
+            className={`px-6 py-3 rounded-lg font-medium shadow-md transition ${
+              product.stock
+                ? "bg-black text-white hover:bg-gray-800"
+                : "bg-gray-400 text-white cursor-not-allowed"
+            }`}
+          >
+            + Add to Cart
+          </button>
+        </div>
+
+        {/* Description */}
+        <div className="mt-6">
+          <h2 className="text-lg font-semibold mb-2">Description</h2>
+          <p className="text-gray-600">{product.description}</p>
+        </div>
+      </div>
+    </div>
+    
+  );
+
+};
+
+export default ProductDetailsPage;

@@ -19,6 +19,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Loader } from 'lucide-react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { updateUserPaymentMethod } from '@/lib/actions/user.actions';
+// import Image from 'next/image';
 
 
 // const PaymentMethodForm = ({
@@ -71,6 +72,8 @@ const PaymentMethodForm = ({
         <p className='text-sm text-muted-foreground'>
           Please select a payment method
         </p>
+        {/* <Image src='/images/sneha_qr.jpg' alt='qrcode' width='50' height='50' className="h-full w-full object-cover"/> */}
+
         <Form {...form}>
           <form
             method='post'
@@ -111,6 +114,10 @@ const PaymentMethodForm = ({
                 )}
               />
             </div>
+            {/* <div>
+            <Image src='/images/sneha_qr.jpg' alt='qrcode' width='30' height='30' className="h-full w-full object-cover"/>
+            </div> */}
+            
 
             <div className='flex gap-2'>
               <Button type='submit' disabled={isPending}>

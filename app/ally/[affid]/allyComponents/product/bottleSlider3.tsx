@@ -1,0 +1,127 @@
+"use client";
+
+import { useTransition, useState } from "react";
+// import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { selectImage } from "@/lib/actions/selectBottle";
+import { Badge } from "@/components/ui/badge";
+
+interface ImageSliderProps {
+  images: { src: string; alt: string; price: string; volume: string }[];
+}
+
+export default function ImageSlider({ images }: ImageSliderProps) {
+  const [current, setCurrent] = useState(0);
+  const [selected, setSelected] = useState<string | null>(null);
+  const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
+  const [selectedVolume, setSelectedVolume] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+
+  const nextSlide = () => setCurrent((prev) => (prev + 1) % images.length);
+  const prevSlide = () => setCurrent((prev) => (prev - 1 + images.length) % images.length);
+
+  // const handleSelect = (src: string) => {
+  //   startTransition(async () => {
+  //     await selectImage(src);
+  //     setSelected(src);
+  //   });
+  // };
+
+  const handleSelect = (price:string,volume:string, src:string) => {
+    // console.log('src', src)
+    startTransition(async () => {
+      // await selectImage(src);
+      await selectImage(src, price, volume);
+      setSelected(src);
+      setSelectedPrice(price);
+      setSelectedVolume(volume);
+    });
+  };
+
+
+  return (
+    <div className="w-full h-full max-w-5xl mx-auto flex flex-col md:flex-row gap-6 items-start">
+      {/* Slider Section */}
+      <div className="flex-1">
+                <div className="relative w-full h-half overflow-hidden rounded-2xl shadow-lg">
+                {/* <AnimatePresence mode="wait">
+                    <motion.div
+                    key={current}
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -100 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute inset-0 flex items-center justify-center rounded-2xl overflow-hidden"
+                    > */}
+                    
+                    <Image
+                        src={images[current].src}
+                        alt={images[current].alt}
+                        // fill
+                        width={600}
+                        height={600}
+                        className="object-cover"
+                    />
+                  <Badge className={'absolute top-4 right-4 px-4 py-2 rounded-lg shadow-md'}>Price: {images[current].price}</Badge>
+                  <Badge className={'absolute top-4 left-4 px-4 py-2 rounded-lg shadow-md'}>Volume: {images[current].volume}</Badge>
+                    {/* Select Button Overlay */}
+                    <button
+                        // onClick={() => handleSelect(images[current].src)}
+                        onClick={() => handleSelect(images[current].price,images[current].volume, images[current].src)}
+                        disabled={isPending}
+                        className={`absolute bottom-4 right-4 px-4 py-2 rounded-lg shadow-md transition ${
+                        selected === images[current].src
+                        // selectedPrice===images[current].price
+                            ? "bg-green-600 text-white"
+                            : "bg-blue-600 text-white hover:bg-blue-700"
+                        }`}
+                    >
+                        {selected === images[current].src
+                        ? "Selected ✓"
+                        : isPending
+                        ? "Saving..."
+                        : "Select"}
+                    </button>
+                    {/* </motion.div>
+                </AnimatePresence> */}
+                </div>
+
+                {/* Navigation */}
+                <div className="flex justify-between w-full mt-4 px-4">
+                <button
+                    onClick={prevSlide}
+                    className="px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300 transition"
+                >
+                    ◀ Prev
+                </button>
+                <button
+                    onClick={nextSlide}
+                    className="px-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300 transition"
+                >
+                    Next ▶
+                </button>
+                </div>
+      </div>
+
+      {/* Selected Image Preview */}
+      <div className="w-full md:w-64 flex flex-col items-center border rounded-2xl shadow-md p-4 bg-gray-50">
+        <h2 className="text-lg font-semibold mb-3">Your Bottle Selection</h2>
+        {selected ? (
+          <div className="relative w-48 h-64 rounded-xl overflow-hidden shadow">
+            
+            <Image
+              src={selected}
+              alt="Selected"
+              fill
+              className="object-cover"
+            />
+            <Badge className={'absolute bottom-4 right-4 px-4 py-2 rounded-lg '}>Price: {selectedPrice}</Badge>
+            <Badge className={'absolute top-4 right-4 px-4 py-2 rounded-lg '}>Volume: {selectedVolume}</Badge>
+          </div>
+        ) : (
+          <p className="text-gray-500">No image selected yet</p>
+        )}
+      </div>
+    </div>
+  );
+}

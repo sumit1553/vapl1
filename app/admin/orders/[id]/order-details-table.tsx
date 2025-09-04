@@ -42,7 +42,7 @@ import {
 
 
 
-const OrderDetailsTable = ({
+const AdminOrderDetailsTable = ({
   order,
   paypalClientId,
   isAdmin,
@@ -309,4 +309,4 @@ const PrintLoadingState = () => {
   );
 };
 
-export default OrderDetailsTable;
+export default AdminOrderDetailsTable;

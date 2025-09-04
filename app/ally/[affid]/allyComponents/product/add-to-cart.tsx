@@ -8,11 +8,13 @@ import { ToastAction } from '@/components/ui/toast';
 import { addItemToCart, removeItemFromCart } from '@/lib/actions/cart.actions';
 import { useTransition } from 'react';
 
+
+
 // const AddToCart = ({ cart, item }: { cart?: Cart; item: CartItem }) => {
 const AddToCart = ({ affid, cart, item }: { affid: string; cart?: Cart; item: CartItem }) => {
   
   // console.log('AdCARRT', affid);
-  // console.log('AdCartItem', item);
+  console.log('AdCartItem', item);
 
   const router = useRouter();
   const { toast } = useToast();
@@ -95,9 +97,13 @@ const AddToCart = ({ affid, cart, item }: { affid: string; cart?: Cart; item: Ca
       ) : (
         <Plus className='w-4 h-4' />
       )}{' '}
-      Add To Cart
+      {/* Add To Cart */}
+      {/* <SprayCan size={16}/> */}
+       Add
     </Button>
   );
 };
+
+{/* <Button className="inline-flex items-center gap-2"><SprayCan size={16}/> Add</Button> */}
 
 export default AddToCart;

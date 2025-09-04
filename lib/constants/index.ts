@@ -8,6 +8,9 @@ export const SERVER_URL =
   export const LATEST_PRODUCTS_LIMIT =
   Number(process.env.LATEST_PRODUCTS_LIMIT) || 4;
 
+  export const LATEST_BOTTLES_LIMIT =
+  Number(process.env.LATEST_BOTTLES_LIMIT) || 4;
+
 export const signInDefaultValues = {
   email: 'admin@example.com',
   password: '123456',
@@ -30,9 +33,9 @@ export const shippingAddressDefaultValues = {
 
 export const PAYMENT_METHODS = process.env.PAYMENT_METHODS
   ? process.env.PAYMENT_METHODS.split(', ')
-  : ['PayPal', 'CashOnDelivery'];
+  : ['PayPal', 'ShareQRCode'];
 export const DEFAULT_PAYMENT_METHOD =
-  process.env.DEFAULT_PAYMENT_METHOD || 'CashOnDelivery';
+  process.env.DEFAULT_PAYMENT_METHOD || 'ShareQRCode';
   // process.env.DEFAULT_PAYMENT_METHOD || 'PayPal';
 
 export const PAGE_SIZE = Number(process.env.PAGE_SIZE) || 12;
@@ -51,6 +54,20 @@ export const productDefaultValues = {
   isFeatured: false,
   banner: null,
 };
+
+export const bottleDefaultValues = {
+  name: '',
+  category: '',
+  images: [],
+  brand: '',
+  description: '',
+  stock: 0,
+  price: '',
+  volume: '',
+  isFeatured: false,
+  banner: null,
+};
+
 
 // export const USER_ROLES = process.env.USER_ROLES
 //   ? process.env.USER_ROLES.split(', ')

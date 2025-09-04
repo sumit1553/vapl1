@@ -33,6 +33,8 @@ import LuxuryPerfumeSprayWithBottle from "./sprayperfume5";
  *  /patterns/waves.png (optional for beach modal animation)
  */
 
+
+
 // ---------- Utility Components ----------
 const Container: React.FC<React.PropsWithChildren<{ className?: string }>> = ({ children, className = "" }) => (
   <div className={`mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ${className}`}>{children}</div>
@@ -41,6 +43,7 @@ const Container: React.FC<React.PropsWithChildren<{ className?: string }>> = ({ 
 const Badge: React.FC<React.PropsWithChildren<{ className?: string }>> = ({ children, className = "" }) => (
   <span className={`inline-flex items-center rounded-full border px-3 py-1 text-xs tracking-wide ${className}`}>{children}</span>
 );
+
 
 const Button: React.FC<React.PropsWithChildren<{ onClick?: () => void; variant?: "primary" | "ghost" | "outline"; className?: string; as?: "button" | "a"; href?: string }> > = ({
   children,
@@ -66,6 +69,7 @@ const Button: React.FC<React.PropsWithChildren<{ onClick?: () => void; variant?:
     <button onClick={onClick} className={`${base} ${styles} ${className}`}>{children}</button>
   );
 };
+
 
 // ---------- Data ----------
 const products = [
@@ -307,6 +311,8 @@ const moods: Mood[] = [
     backgroundEffect: "steam",
   },
 ];
+
+
 
 const MoodExplorer: React.FC = () => {
   const [selected, setSelected] = useState<Mood | null>(null);

@@ -106,15 +106,19 @@ const CartTable = ({ cart , affid}: { cart?: Cart; affid: string; }) => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Item</TableHead>
+                  <TableHead className='text-center'>Item</TableHead>
+                  <TableHead className='text-center'>Inspired By</TableHead>
                   <TableHead className='text-center'>Quantity</TableHead>
-                  <TableHead className='text-right'>Price</TableHead>
+                  <TableHead className='text-center'>Price</TableHead>
+                  <TableHead className='text-center'>Volume</TableHead>
+                  <TableHead className='text-center'>Bottle</TableHead>
                 </TableRow>
               </TableHeader>
+              
               <TableBody>
                 {cart.items.map((item) => (
                   <TableRow key={item.slug}>
-                    <TableCell>
+                    <TableCell className='text-center'>
                       <Link
                         // href={`/product/${item.slug}`}
                         href={`/ally/${affid}/product/${item.slug}`}
@@ -126,15 +130,25 @@ const CartTable = ({ cart , affid}: { cart?: Cart; affid: string; }) => {
                           width={50}
                           height={50}
                         />
-                        <span className='px-2'>{item.name}</span>
+                        {/* <span className='px-2'>{item.name}</span> */}
                       </Link>
                     </TableCell>
+                    <TableCell className='text-center'> <span className='px-2'>{item.name}</span></TableCell>
                     <TableCell className='flex-center gap-2'>
                       <RemoveButton item={item} />
                       <span>{item.qty}</span>
                       <AddButton item={item} />
                     </TableCell>
-                    <TableCell className='text-right'>INR {item.price}</TableCell>
+                    <TableCell className='text-center'> {formatCurrency(item.price)}</TableCell>
+                    <TableCell className='text-center'> {item.volume}</TableCell>
+                    <TableCell className='text-center'>
+                        <Image
+                          src={item.bottleImage}
+                          alt={item.price}
+                          width={30}
+                          height={30}
+                        />
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -144,7 +158,8 @@ const CartTable = ({ cart , affid}: { cart?: Cart; affid: string; }) => {
           <Card>
             <CardContent className='p-4 gap-4'>
               <div className='pb-3 text-xl'>
-                Subtotal ({cart.items.reduce((a, c) => a + c.qty, 0)}):
+                {/* Subtotal ({cart.items.reduce((a, c) => a + c.qty, 0)}): */}
+                Subtotal :
                 <span className='font-bold'>
                   {formatCurrency(cart.itemsPrice)}
                 </span>
@@ -166,6 +181,7 @@ const CartTable = ({ cart , affid}: { cart?: Cart; affid: string; }) => {
               </Button>
             </CardContent>
           </Card>
+
         </div>
       )}
     </>

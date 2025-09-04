@@ -61,12 +61,15 @@ const PlaceOrderPage = async (
         <div className='md:col-span-2 overflow-x-auto space-y-4'>
           <Card>
             <CardContent className='p-4 gap-4'>
-              <h2 className='text-xl pb-4'>Shipping Address</h2>
+              <h2 className='text-xl pb-4 font-bold'>Shipping Address</h2>
               <p>{userAddress.fullName}</p>
               <p>
-                {userAddress.streetAddress}, {userAddress.city}{' '}
-                {userAddress.postalCode}, {userAddress.country}{' '}
+                {userAddress.streetAddress},
               </p>
+              <p>
+                {userAddress.city}{'-'}{userAddress.postalCode}, {userAddress.country}{' '}
+              </p>
+              <p>{userAddress.shippingPhone}</p>
               <div className='mt-3'>
                 {/* <Link href='/shipping-address'> */}
                 <Link href={`/ally/${affid}/shipping-address`}>
@@ -78,7 +81,7 @@ const PlaceOrderPage = async (
 
           <Card>
             <CardContent className='p-4 gap-4'>
-              <h2 className='text-xl pb-4'>Payment Method</h2>
+              <h2 className='text-xl pb-4 font-bold'>Payment Method</h2>
               <p>{user.paymentMethod}</p>
               <div className='mt-3'>
                 {/* <Link href='/payment-method'> */}
@@ -91,38 +94,55 @@ const PlaceOrderPage = async (
 
           <Card>
             <CardContent className='p-4 gap-4'>
-              <h2 className='text-xl pb-4'>Order Items</h2>
+              <h2 className='text-xl pb-4 font-bold'>Order Items</h2>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Item</TableHead>
-                    <TableHead>Quantity</TableHead>
-                    <TableHead>Price</TableHead>
+                    <TableHead className='text-center'>Item</TableHead>
+                    <TableHead className='text-center'>Name</TableHead>
+                     <TableHead className='text-center'>Qty</TableHead>
+                    <TableHead className='text-center'>Volume</TableHead>
+                    <TableHead className='text-center'>Price</TableHead>
+                    <TableHead className='text-center'>Bottle</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {cart.items.map((item) => (
                     <TableRow key={item.slug}>
-                      <TableCell>
-                        <Link
-                          // href={`/product/{item.slug}`}
+                      <TableCell className='text-center'>
+                        {/* <Link
                           href={`/ally/${affid}/product/${item.slug}`}
                           className='flex items-center'
-                        >
+                        > */}
                           <Image
                             src={item.image}
                             alt={item.name}
                             width={50}
                             height={50}
+                            className='justify-center'
                           />
-                          <span className='px-2'>{item.name}</span>
-                        </Link>
+                          
+                        {/* </Link> */}
                       </TableCell>
-                      <TableCell>
+                      <TableCell className='text-center'>
+                        <span className='px-2'>{item.name}</span>
+                      </TableCell>
+                      <TableCell className='text-center'>
                         <span className='px-2'>{item.qty}</span>
                       </TableCell>
-                      <TableCell className='text-right'>
-                        INR {item.price}
+                      <TableCell className='text-center'>
+                        <span className='px-2'>{item.volume}</span>
+                      </TableCell>
+                      <TableCell className='text-center'>
+                        {formatCurrency(item.price)}
+                      </TableCell>
+                      <TableCell className='text-center'>
+                          <Image
+                            src={item.bottleImage}
+                            alt={item.name}
+                            width={50}
+                            height={50}
+                          />
                       </TableCell>
                     </TableRow>
                   ))}
@@ -139,7 +159,7 @@ const PlaceOrderPage = async (
                 <div>{formatCurrency(cart.itemsPrice)}</div>
               </div>
               <div className='flex justify-between'>
-                <div>Tax</div>
+                <div>Gift Pack</div>
                 <div>{formatCurrency(cart.taxPrice)}</div>
               </div>
               <div className='flex justify-between'>

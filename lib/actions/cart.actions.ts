@@ -14,18 +14,20 @@ const calcPrice = (items: CartItem[]) => {
   const itemsPrice = round2(
       items.reduce((acc, item) => acc + Number(item.price) * item.qty, 0)
     ),
-    shippingPrice = round2(itemsPrice > 100 ? 0 : 10),
-    taxPrice = round2(0.15 * itemsPrice),
+    shippingPrice = round2(itemsPrice > 500 ? 0 : 100),
+    // taxPrice = round2(0.15 * itemsPrice),
+    taxPrice = round2(0 * itemsPrice),
     totalPrice = round2(itemsPrice + taxPrice + shippingPrice);
 
   return {
-    itemsPrice: itemsPrice.toFixed(2),
-    shippingPrice: shippingPrice.toFixed(2),
-    taxPrice: taxPrice.toFixed(2),
-    totalPrice: totalPrice.toFixed(2),
+    itemsPrice: itemsPrice.toFixed(1),
+    shippingPrice: shippingPrice.toFixed(1),
+    taxPrice: taxPrice.toFixed(1),
+    totalPrice: totalPrice.toFixed(1),
     // affid: affid ,
   };
 };
+
 
 export async function addItemToCart(data: CartItem) {
   try {
@@ -209,6 +211,7 @@ export async function removeItemFromCart(productId: string) {
     if (!product) throw new Error('Product not found');
 
     // Get user cart
+    // does it need getMyCart2(affid)
     const cart = await getMyCart();
     if (!cart) throw new Error('Cart not found');
 

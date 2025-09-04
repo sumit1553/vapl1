@@ -1,0 +1,201 @@
+"use client";
+import React, { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Volume2, VolumeX } from "lucide-react";
+
+type Mood = {
+  name: string;
+  video: string;
+  audio: string;
+  tagline: string;
+  perfumes: { name: string; notes: string }[];
+  backgroundEffect: "waves" | "petals" | "steam";
+};
+
+const moods: Mood[] = [
+  {
+    name: "Beach",
+    video: "/videos/mood-beach.mp4",
+    audio: "/audio/beach-waves.mp3",
+    tagline: "Fresh. Breezy. Ocean Escape.",
+    perfumes: [
+      { name: "Azure Mist", notes: "Citrus, Sea Salt, Musk" },
+      { name: "Ocean Drift", notes: "Bergamot, Marine, Amber" },
+    ],
+    backgroundEffect: "waves",
+  },
+  {
+    name: "Garden",
+    video: "/videos/mood-garden.mp4",
+    audio: "/audio/garden-birds.mp3",
+    tagline: "Bloom with Nature.",
+    perfumes: [
+      { name: "Floral Serenade", notes: "Rose, Jasmine, Sandalwood" },
+      { name: "Green Whisper", notes: "Herbs, Lily, Vetiver" },
+    ],
+    backgroundEffect: "petals",
+  },
+  {
+    name: "Café",
+    video: "/videos/mood-cafe.mp4",
+    audio: "/audio/cafe-ambience.mp3",
+    tagline: "Warm. Cozy. Romantic.",
+    perfumes: [
+      { name: "Vanilla Noir", notes: "Vanilla, Coffee, Patchouli" },
+      { name: "Spice Affair", notes: "Cinnamon, Clove, Tonka Bean" },
+    ],
+    backgroundEffect: "steam",
+  },
+];
+
+export default function MoodExplorer3() {
+  const [selectedMood, setSelectedMood] = useState<Mood | null>(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Handle ambient sound playback
+  useEffect(() => {
+    if (selectedMood) {
+      audioRef.current = new Audio(selectedMood.audio);
+      audioRef.current.loop = true;
+      audioRef.current.volume = 0.5;
+
+      if (isPlaying) {
+        audioRef.current.play().catch(() => {
+          console.warn("Autoplay blocked. User interaction needed.");
+        });
+      }
+    }
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, [selectedMood]);
+
+  // Handle toggle play/pause
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+      }
+    }
+  }, [isPlaying]);
+
+  // Animated Background Overlay for Modal
+  const renderBackgroundEffect = (effect: Mood["backgroundEffect"]) => {
+    switch (effect) {
+      case "waves":
+        return (
+          <motion.div
+            className="absolute inset-0 bg-blue-200/10"
+            animate={{ backgroundPosition: ["0% 0%", "100% 100%"] }}
+            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+            style={{ backgroundImage: "url('/patterns/waves.png')", backgroundSize: "cover" }}
+          />
+        );
+      case "petals":
+        return (
+          <motion.div
+            className="absolute inset-0 pointer-events-none"
+            animate={{ y: [0, 30, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <div className="absolute w-20 h-20 bg-pink-200/40 rounded-full blur-3xl top-10 left-10" />
+            <div className="absolute w-16 h-16 bg-pink-300/40 rounded-full blur-2xl top-40 left-2/3" />
+          </motion.div>
+        );
+      case "steam":
+        return (
+          <motion.div
+            className="absolute inset-0 pointer-events-none flex justify-center"
+            initial={{ opacity: 0.3 }}
+            animate={{ y: [40, -40], opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <div className="w-32 h-48 bg-gray-200/30 rounded-full blur-3xl" />
+          </motion.div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="py-16 bg-black text-white">
+      <h2 className="text-4xl font-bold text-center mb-10">Explore by Mood</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 max-w-6xl mx-auto">
+        {moods.map((mood, i) => (
+          <motion.div
+            key={i}
+            whileHover={{ scale: 1.05 }}
+            className="cursor-pointer relative"
+            onClick={() => {
+              setSelectedMood(mood);
+              setIsPlaying(true);
+            }}
+          >
+            <Card className="relative overflow-hidden rounded-2xl shadow-lg h-64">
+              {/* Video Background */}
+              <video
+                src={mood.video}
+                className="absolute top-0 left-0 w-full h-full object-cover"
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+              {/* Overlay with mood info */}
+              <CardContent className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center">
+                <h3 className="text-2xl font-semibold">{mood.name}</h3>
+                <p className="text-sm mt-2">{mood.tagline}</p>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Mood Modal */}
+      <Dialog open={!!selectedMood} onOpenChange={() => setSelectedMood(null)}>
+        <DialogContent className="bg-white text-black rounded-2xl p-6 max-w-lg relative overflow-hidden">
+          {/* Background Animation */}
+          {selectedMood && renderBackgroundEffect(selectedMood.backgroundEffect)}
+
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold flex items-center justify-between relative z-10">
+              {selectedMood?.name} Mood Picks
+              {/* Sound Toggle Button */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsPlaying(!isPlaying)}
+              >
+                {isPlaying ? (
+                  <Volume2 className="h-6 w-6 text-gray-700" />
+                ) : (
+                  <VolumeX className="h-6 w-6 text-gray-700" />
+                )}
+              </Button>
+            </DialogTitle>
+          </DialogHeader>
+
+          <div className="mt-4 space-y-4 relative z-10">
+            {selectedMood?.perfumes.map((perfume, i) => (
+              <div key={i} className="p-3 border rounded-lg shadow-sm bg-white/80 backdrop-blur-md">
+                <h4 className="text-lg font-semibold">{perfume.name}</h4>
+                <p className="text-sm text-gray-600">Notes: {perfume.notes}</p>
+                <Button className="mt-2 w-full">Try Now</Button>
+              </div>
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+}

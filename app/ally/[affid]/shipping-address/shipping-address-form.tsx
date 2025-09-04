@@ -26,7 +26,7 @@ import { shippingAddressDefaultValues } from '@/lib/constants';
 
 const ShippingAddressForm = ({ affid, address }: { affid: string; address: ShippingAddress }) => {
 
-  console.log('ffid-ship', affid)
+  // console.log('ffid-ship', affid)
   const router = useRouter();
   const { toast } = useToast();
 
@@ -148,7 +148,7 @@ const ShippingAddressForm = ({ affid, address }: { affid: string; address: Shipp
                   >;
                 }) => (
                   <FormItem className='w-full'>
-                    <FormLabel>Postal Code</FormLabel>
+                    <FormLabel>PinCode</FormLabel>
                     <FormControl>
                       <Input placeholder='Enter postal code' {...field} />
                     </FormControl>
@@ -160,19 +160,41 @@ const ShippingAddressForm = ({ affid, address }: { affid: string; address: Shipp
             <div className='flex flex-col md:flex-row gap-5'>
               <FormField
                 control={form.control}
-                name='country'
+                name='state'
                 render={({
                   field,
                 }: {
                   field: ControllerRenderProps<
                     z.infer<typeof shippingAddressSchema>,
-                    'country'
+                    'state'
                   >;
                 }) => (
                   <FormItem className='w-full'>
-                    <FormLabel>Country</FormLabel>
+                    <FormLabel>State</FormLabel>
                     <FormControl>
-                      <Input placeholder='Enter country' {...field} />
+                      <Input placeholder='Enter State' {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className='flex flex-col md:flex-row gap-5'>
+              <FormField
+                control={form.control}
+                name='shippingPhone'
+                render={({
+                  field,
+                }: {
+                  field: ControllerRenderProps<
+                    z.infer<typeof shippingAddressSchema>,
+                    'shippingPhone'
+                  >;
+                }) => (
+                  <FormItem className='w-full'>
+                    <FormLabel>Mobile</FormLabel>
+                    <FormControl>
+                      <Input placeholder='Enter phone' {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

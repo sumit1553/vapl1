@@ -1,0 +1,12 @@
+
+
+cart.actions.ts
+=> removeItemFromCart() - check for getMyCart
+
+
+admin => order => details (not working)
+
+
+[affid]=> product/ add to cart (add to cart button shud appaear only after price & volume is returned)
+
+utils: round no decimal placs

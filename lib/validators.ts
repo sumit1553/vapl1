@@ -28,6 +28,27 @@ export const updateProductSchema = insertProductSchema.extend({
   id: z.string().min(1, 'Id is required'),
 });
 
+// Schema for inserting bottles
+export const insertBottleSchema = z.object({
+  name: z.string().min(3, 'Name must be at least 3 characters'),
+  category: z.string().min(3, 'Category must be at least 3 characters'),
+  images: z.array(z.string()).min(1, 'Bottle must have at least one image'),
+  brand: z.string().min(3, 'Brand must be at least 3 characters'),
+  description: z.string().min(3, 'Description must be at least 3 characters'),
+  stock: z.coerce.number(),
+  price: z.string().min(2, 'Price must be at least 2 characters'),
+  volume: z.string().min(3, 'Volume must be at least 3 characters'),
+  isFeatured: z.boolean(),
+  banner: z.string().nullable(),
+});
+
+// Schema for updating bottles
+export const updateBottleSchema = insertBottleSchema.extend({
+  id: z.string().min(1, 'Id is required'),
+});
+
+
+
 // Schema for signing users in
 export const signInFormSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -85,7 +106,10 @@ export const cartItemSchema = z.object({
   slug: z.string().min(1, 'Slug is required'),
   qty: z.number().int().nonnegative('Quantity must be a positive number'),
   image: z.string().min(1, 'Image is required'),
-  price: currency,
+  // price: currency,
+  price:z.string().min(1, 'Price is required'),
+  volume:z.string().min(1, 'Volume is required'),
+  bottleImage:z.string().min(1, 'Image is required'),
   affid: z.string(),
   
 });
@@ -108,14 +132,15 @@ export const shippingAddressSchema = z.object({
   streetAddress: z.string().min(3, 'Address must be at least 3 characters'),
   city: z.string().min(3, 'City must be at least 3 characters'),
   postalCode: z.string().min(3, 'Postal code must be at least 3 characters'),
-  country: z.string().min(3, 'Country must be at least 3 characters'),
+  state: z.string().min(3, 'State must be at least 3 characters'),
+  country: z.string().min(3, 'Country must be at least 3 characters').optional(),
+  shippingPhone: z.string().min(3, 'Phone must be at least 3 characters').optional(),
   lat: z.number().optional(),
   lng: z.number().optional(),
 });
 
 // Schema for payment method
-export const paymentMethodSchema = z
-  .object({
+export const paymentMethodSchema = z.object({
     type: z.string().min(1, 'Payment method is required'),
   })
   .refine((data) => PAYMENT_METHODS.includes(data.type), {
@@ -144,6 +169,8 @@ export const insertOrderItemSchema = z.object({
   image: z.string(),
   name: z.string(),
   price: currency,
+  volume: z.string(),
+  bottleImage: z.string(),
   qty: z.number(),
   affid: z.string(),
 });

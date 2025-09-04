@@ -7,7 +7,7 @@
 // import { getRedirectError } from 'next/dist/client/components/redirect';
 
 
-import { convertToPlainObject, formatDateTime, formatError } from '../utils';
+import { convertToPlainObject,  formatError } from '../utils';
 import { auth } from '@/auth';
 import {  getMyCart2 } from './cart.actions';
 import { getUserById } from './user.actions';
@@ -105,6 +105,8 @@ export async function createOrder(affid:string) {
               product: { connect: { id: item.productId } },
               qty: item.qty,
               price: item.price,
+              volume:item.volume,
+              bottleImage:item.bottleImage,
               name: item.name,
               slug: item.slug,
               image: item.image,
@@ -132,7 +134,7 @@ export async function createOrder(affid:string) {
             
           },
         });
-        console.log('insertedOrder-II', insertedOrder.id);
+        // console.log('insertedOrder-II', insertedOrder.id);
         return insertedOrder.id;
     });
 
@@ -160,6 +162,28 @@ export async function createOrder(affid:string) {
 
 
 
+
+// Get order by only id
+export async function getOrderByOnlyId(orderId: string) {
+
+  const data = await prisma.order.findFirst({
+    where: {
+      id: orderId,
+      
+    },
+    include: {
+      orderitems: true,
+      user: { select: { name: true, email: true } },
+      
+    },
+  });
+  // console.log('getOrderById-order', data); //affid working
+
+  return convertToPlainObject(data);
+}
+
+
+
 // Get order by id
 export async function getOrderById(orderId: string, affid:string) {
 console.log('affid', affid)
@@ -172,10 +196,9 @@ console.log('affid', affid)
       orderitems: true,
       user: { select: { name: true, email: true } },
       
-      
     },
   });
-  console.log('getOrderById-order', data); //affid working
+  // console.log('getOrderById-order', data); //affid working
 
   return convertToPlainObject(data);
 }
@@ -198,7 +221,7 @@ console.log('affid', affid)
       
     },
   });
-  console.log('getOrderById-order', data); //affid working
+  // console.log('getOrderById-order', data); //affid working
 
   return convertToPlainObject(data);
 }
@@ -347,7 +370,7 @@ export async function updateOrderToPaid({
       user: { select: { name: true, email: true } },
     },
   });
-console.log('updatedOrder', updatedOrder)
+// console.log('updatedOrder', updatedOrder)
 
 
   if (!updatedOrder) throw new Error('Order not found');
@@ -673,9 +696,9 @@ export async function getAffilaiteTodayOrdersbyID({
   affid:string;
 }) {
 
-  const currentDate = new Date();
-  const today = formatDateTime(currentDate).dateOnly;
-  console.log('today', today)
+  // const currentDate = new Date();
+  // const today = formatDateTime(currentDate).dateOnly;
+  // console.log('today', today)
   
   // const queryFilter: Prisma.OrderWhereInput =
   //   query && query !== 'all'

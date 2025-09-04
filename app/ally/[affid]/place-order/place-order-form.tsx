@@ -17,9 +17,9 @@ const PlaceOrderForm = ({  affid}: {affid: string; }) => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log('affid-pcOrder', affid)
+    // console.log('affid-pcOrder', affid)
     const res = await createOrder(affid);  //issue here
-    console.log('res', res)
+    // console.log('res', res)
 
     if (res.redirectTo) {
       // router.push(res.redirectTo);
