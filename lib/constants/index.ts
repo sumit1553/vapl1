@@ -23,6 +23,24 @@ export const signUpDefaultValues = {
   confirmPassword: '',
 };
 
+
+export const primecardDefaultValues = {
+  name: '',
+  phone: '',
+  email: '',
+  alt_phone_1: '',
+  card_no: '',
+  issuedDate: '',
+  expiryDate: '',
+  discountOffered: '',
+  current_Occup: '',
+  address: '',
+  city: '',
+  state: '',
+  country: '',
+  zipcode: '',
+};
+
 export const shippingAddressDefaultValues = {
   fullName: '',
   streetAddress: '',
@@ -77,7 +95,7 @@ export const PUBLIC_URL = process.env.PUBLIC_URL || 'http://localhost:3000';
 
 export const USER_ROLES = process.env.USER_ROLES
   ? process.env.USER_ROLES.split(', ')
-  : ['admin', 'user', 'affiliate'];
+  : ['admin', 'user', 'sponsoror'];
 
 
 export const SETUP_TYPES = process.env.SETUP_TYPES

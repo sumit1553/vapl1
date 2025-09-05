@@ -49,6 +49,12 @@ const AdminUserPage = async (props: {
             )}
           </div>
 
+                    <div className='flex align-right'>
+            <Button asChild variant='outline' size='sm'>
+                        <Link href={`/admin/users/usersign-up`}>Add User</Link>
+            </Button>
+          </div>
+
           <div className='overflow-x-auto'>
             <Table>
               <TableHeader>

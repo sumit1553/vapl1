@@ -15,7 +15,8 @@ import { Metadata } from 'next';
 // import AffiliateSignUpForm from './affsign-up-form';
 
 import { requireAdmin } from '@/lib/auth-guard';
-import Affiliate2SignUpForm from './affsign-up-form2';
+
+import SignUpForm from './sign-up-form';
 
 export const metadata: Metadata = {
   title: 'Sign Up',
@@ -40,7 +41,7 @@ const AdminAffiliateSignupPage = async () => {
       <Card>
         <CardHeader className='space-y-4'>
          
-          <CardTitle className='text-center'>Create Sponsoror Account</CardTitle>
+          <CardTitle className='text-center'>Create Users Account</CardTitle>
           {/* <CardDescription className='text-center'>
             Enter your information below to sign up
           </CardDescription> */}
@@ -48,7 +49,8 @@ const AdminAffiliateSignupPage = async () => {
         <CardContent className='space-y-4'>
           {/* <AffiliateSignUpForm /> */}
 
-          <Affiliate2SignUpForm />
+          {/* <Affiliate2SignUpForm /> */}
+          <SignUpForm />
           
         </CardContent>
       </Card>

@@ -10,13 +10,13 @@ const links = [
     href: '/admin/overview',
   },
   {
-    title: 'Products',
-    href: '/admin/products',
+    title: 'Prime Cards',
+    href: '/admin/primecards',
   },
-  {
-    title: 'Bottles',
-    href: '/admin/bottles',
-  },
+  // {
+  //   title: 'Bottles',
+  //   href: '/admin/bottles',
+  // },
   {
     title: 'Orders',
     href: '/admin/orders',
@@ -26,7 +26,7 @@ const links = [
     href: '/admin/users',
   },
   {
-    title: 'Affiliates',
+    title: 'Sponsorors',
     href: '/admin/aff',
   },
 ];

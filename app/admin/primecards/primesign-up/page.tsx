@@ -15,10 +15,10 @@ import { Metadata } from 'next';
 // import AffiliateSignUpForm from './affsign-up-form';
 
 import { requireAdmin } from '@/lib/auth-guard';
-import Affiliate2SignUpForm from './affsign-up-form2';
+import PrimecardRegForm from './primecard-form';
 
 export const metadata: Metadata = {
-  title: 'Sign Up',
+  title: 'Primecard Reg',
 };
 
 // const AdminAffiliateSignupPage = async (props: {
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 //   }>;
 // }) => {
 
-const AdminAffiliateSignupPage = async () => {
+const AdminPrimecardRegPage = async () => {
 
 
   await requireAdmin();
@@ -40,7 +40,7 @@ const AdminAffiliateSignupPage = async () => {
       <Card>
         <CardHeader className='space-y-4'>
          
-          <CardTitle className='text-center'>Create Sponsoror Account</CardTitle>
+          <CardTitle className='text-center'>Register Prime Card</CardTitle>
           {/* <CardDescription className='text-center'>
             Enter your information below to sign up
           </CardDescription> */}
@@ -48,7 +48,7 @@ const AdminAffiliateSignupPage = async () => {
         <CardContent className='space-y-4'>
           {/* <AffiliateSignUpForm /> */}
 
-          <Affiliate2SignUpForm />
+          <PrimecardRegForm />
           
         </CardContent>
       </Card>
@@ -56,4 +56,4 @@ const AdminAffiliateSignupPage = async () => {
   );
 };
 
-export default AdminAffiliateSignupPage;
+export default AdminPrimecardRegPage;

@@ -66,7 +66,7 @@ const Affiliate2SignUpForm = () => {
         </div>
         
         <div>
-          <Label htmlFor='setuptype'>Setup Type</Label>
+          <Label htmlFor='setuptype'>Sponsoror Type</Label>
           {/* <Input
             id='setuptype'
             name='setuptype'

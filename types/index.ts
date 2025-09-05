@@ -10,6 +10,7 @@ import {
   insertReviewSchema,
   updateAffiliate2Schema,
   insertBottleSchema,
+  PrimecardFormSchema,
 } from '@/lib/validators';
 
 
@@ -21,6 +22,10 @@ export type Product = z.infer<typeof insertProductSchema> & {
   createdAt: Date;
 };
 
+export type Primecard = z.infer<typeof PrimecardFormSchema> & {
+  id: string;
+  createdAt: Date;
+};
 
 export type Bottle = z.infer<typeof insertBottleSchema> & {
   id: string;

@@ -1,11 +1,11 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 
 // import { APP_NAME } from '@/lib/constants';
 // import Menu from './shared/header/menu';
 
-import { Button } from './ui/button';
-import { ShoppingCart } from 'lucide-react';
+// import { Button } from './ui/button';
+// import { ShoppingCart } from 'lucide-react';
 import UserButton from './shared/header/user-button';
 // import Menu from './menu';
 // import CategoryDrawer from './category-drawer';
@@ -54,29 +54,29 @@ const Header2 = () => {
       
       {/* <a href="#" className="text-xl font-bold tracking-tight">QV</a> */}
        <Link href='/' className='flex-start ml-4'>
-            <Image
+            {/* <Image
               src='/images/logo.svg'
               alt='qvlogo'
               height={48}
               width={48}
               priority={true}
-            />
-            {/* <span className='hidden lg:block font-bold text-2xl ml-3'>
-              QV
-            </span> */}
+            /> */}
+            <span className='hidden lg:block font-bold text-2xl ml-3'>
+              VAPL
+            </span>
           </Link>
 
       <nav className="hidden md:flex items-center gap-6 text-sm">
-        <a href="#bestsellers" className="hover:opacity-70">Bestsellers</a>
-        <a href="#moods" className="hover:opacity-70">Explore</a>
-        <a href="#discovery" className="hover:opacity-70">Discovery Set</a>
+        <a href="#about" className="hover:opacity-70">About</a>
+        <a href="#explore" className="hover:opacity-70">Explore</a>
+        {/* <a href="#discovery" className="hover:opacity-70">Discovery Set</a> */}
         <a href="#values" className="hover:opacity-70">Our Values</a>
-        <a href="#reviews" className="hover:opacity-70">Reviews</a>
+        <a href="#contact" className="hover:opacity-70">Contact</a>
       </nav>
       <div className="flex items-center gap-3">
         {/* <ModeToggle /> */}
         {/* <Button variant="outline" className="hidden sm:inline-flex">Sign In</Button> */}
-        <Button className="inline-flex items-center gap-2"><ShoppingCart size={18}/> Cart</Button>
+        {/* <Button className="inline-flex items-center gap-2"><ShoppingCart size={18}/> Cart</Button> */}
         <UserButton />
       </div>
     </Container>

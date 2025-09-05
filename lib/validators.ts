@@ -99,6 +99,27 @@ export const signUpAffiliateFormSchema = z
   });
 
 
+  // primecard
+    export const PrimecardFormSchema = z
+  .object({
+    name: z.string().min(3, 'Name must be at least 3 characters'),
+    phone: z.string().max(10,'Mobile no is invalid'),
+    email: z.string(),
+    alt_phone_1: z.string().optional(),
+    card_no: z.string(),
+    issuedDate: z.string(),
+    expiryDate: z.string(),
+    discountOffered: z.string(),
+    current_Occup: z.string(),
+    address: z.string(),
+    city: z.string(),
+    state: z.string(),
+    country: z.string(),
+    zipcode: z.string(),
+    // isActive: z.boolean(),
+  });
+
+
 // Cart Schemas
 export const cartItemSchema = z.object({
   productId: z.string().min(1, 'Product is required'),
@@ -215,6 +236,9 @@ export const updateAffiliate2Schema = updateAffProfileSchema.extend({
 });
 
 
+export const updatePrimecardSchema = PrimecardFormSchema.extend({
+  id: z.string().min(1, 'Id is required'),
+});
 
 // Schema to insert reviews
 export const insertReviewSchema = z.object({

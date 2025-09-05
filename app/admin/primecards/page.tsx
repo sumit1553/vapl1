@@ -15,13 +15,14 @@ import Pagination from '@/components/shared/pagination';
 // import { Badge } from '@/components/ui/badge';
 import DeleteDialog from '@/components/shared/delete-dialog';
 import { requireAdmin } from '@/lib/auth-guard';
-import { deleteAffilate, getAllAffiliates } from '@/lib/actions/affiliate2.actions';
+
+import { deletePrimecard, getAllPrimecards } from '@/lib/actions/primecard.actions';
 
 export const metadata: Metadata = {
-  title: 'Admin Users',
+  title: 'Prime Users',
 };
 
-const AdminAffiliatePage = async (props: {
+const AdminPrimeuserPage = async (props: {
   searchParams: Promise<{
     page: string;
     query: string;
@@ -33,17 +34,17 @@ const AdminAffiliatePage = async (props: {
 
   // const users = await getAllAffiliates({ page: Number(page), query: searchText });
 
-  const affiliates = await getAllAffiliates({ page: Number(page), query: searchText });
+  const primecards = await getAllPrimecards({ page: Number(page), query: searchText });
 
   return (
     
     <div className='space-y-2'>
           <div className='flex items-center gap-3'>
-            <h1 className='h2-bold'>Sponsorors</h1>
+            <h1 className='h2-bold'>Prime Users</h1>
             {searchText && (
               <div>
                 Filtered by <i>&quot;{searchText}&quot;</i>{' '}
-                <Link href='/admin/aff'>
+                <Link href='/admin/primecards'>
                   <Button variant='outline' size='sm'>
                     Remove Filter
                   </Button>
@@ -54,7 +55,7 @@ const AdminAffiliatePage = async (props: {
 
           <div className='flex align-right'>
             <Button asChild variant='outline' size='sm'>
-                        <Link href={`/admin/aff/affsign-up`}>Add Sponsoror</Link>
+                        <Link href={`/admin/primecards/primesign-up`}>Add Prime card</Link>
             </Button>
           </div>
 
@@ -65,51 +66,44 @@ const AdminAffiliatePage = async (props: {
                   <TableHead>ID</TableHead>
                   <TableHead>NAME</TableHead>
                   <TableHead>PHONE</TableHead>
-                  <TableHead>TYPE</TableHead>
-                  {/* <TableHead>ROLE</TableHead> */}
+                  <TableHead>EMAIL</TableHead>
+                  <TableHead>DISCOUNT</TableHead>
+                  <TableHead>ISSUE DT</TableHead>
+                  <TableHead>EXPIRY DT</TableHead>
                   <TableHead>ACTIONS</TableHead>
                 </TableRow>
               </TableHeader>
 
               <TableBody>
-                {affiliates.data.map((affiliate) => (
-                  <TableRow key={affiliate.id}>
-                    <TableCell>{formatId(affiliate.id)}</TableCell>
-                    <TableCell>{affiliate.name}</TableCell>
-                    <TableCell>{affiliate.phone}</TableCell>
-                    <TableCell>{affiliate.setuptype}</TableCell>
-                    {/* <TableCell>
-                      {user.role === 'user' ? (
-                        <Badge variant='secondary'>User</Badge>
-                      ) : (
-                        <Badge variant='default'>Admin</Badge>
-                      )}
-                    </TableCell> */}
-
-                    {/* <TableCell>
-                       <Badge variant='default'>{user.role}</Badge> 
-                    </TableCell> */}
-
+                {primecards.data.map((primecard) => (
+                  <TableRow key={primecard.id}>
+                    <TableCell>{formatId(primecard.id)}</TableCell>
+                    <TableCell>{primecard.name}</TableCell>
+                    <TableCell>{primecard.phone}</TableCell>
+                    <TableCell>{primecard.email}</TableCell>
+                    <TableCell>{primecard.discountOffered}</TableCell>
+                    <TableCell>{primecard.issuedDate}</TableCell>
+                    <TableCell>{primecard.expiryDate}</TableCell>
                     <TableCell>
                       {/* <Button asChild variant='outline' size='sm'>
                         <Link href={`/admin/aff/qr/${affiliate.id}`}>QR</Link>
                       </Button> */}
                       <Button asChild variant='outline' size='sm'>
-                        <Link href={`/admin/aff/${affiliate.id}`}>Edit</Link>
+                        <Link href={`/admin/aff/${primecard.id}`}>Edit</Link>
                       </Button>
-                      <DeleteDialog id={affiliate.id} action={deleteAffilate} />
+                      <DeleteDialog id={primecard.id} action={deletePrimecard} />
                     </TableCell>
 
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-            {affiliates.totalPages > 1 && (
-              <Pagination page={Number(page) || 1} totalPages={affiliates?.totalPages} />
+            {primecards.totalPages > 1 && (
+              <Pagination page={Number(page) || 1} totalPages={primecards?.totalPages} />
             )}
           </div>
     </div>
   );
 };
 
-export default AdminAffiliatePage;
+export default AdminPrimeuserPage;
