@@ -557,8 +557,8 @@ export default function DossierStyleSite() {
       {/* <Bestsellers /> */}
       {/* <MoodExplorer /> */}
       {/* <DiscoverySet /> */}
-      <Values />
-      <Reviews />
+      {/* <Values /> */}
+      {/* <Reviews /> */}
       <Footer />
     </main>
   );
