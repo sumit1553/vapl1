@@ -1,11 +1,11 @@
 
 "use client";
 // import React, { useState, useEffect, useRef } from "react";
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React from "react";
+// import { motion } from "framer-motion";
 // import { ShoppingCart, Star, Droplets, Sparkles, Play, Pause, ChevronRight, SprayCan } from "lucide-react";
 // import {  Star,  Sparkles, Play, Pause, ChevronRight, SprayCan } from "lucide-react";
-import {  Star } from "lucide-react";
+// import {  Star } from "lucide-react";
 
 // import Image from 'next/image';
 // import Link from "next/link";
@@ -453,60 +453,60 @@ const Container: React.FC<React.PropsWithChildren<{ className?: string }>> = ({ 
 // );
 
 // ---------- Values / Sustainability ----------
-const Values: React.FC = () => (
-  <section id="values" className="py-16">
-    <Container>
-      <div className="grid md:grid-cols-3 gap-6">
-        {[{
-          title: "Clean & Conscious",
-          desc: "IFRA-compliant formulas. No parabens, phthalates or dyes.",
-        },{
-          title: "Cruelty‑free & Vegan",
-          desc: "Never tested on animals. 100% vegan ingredients.",
-        },{
-          title: "Transparent Pricing",
-          desc: "Luxury quality without the luxury markup.",
-        }].map((f, i) => (
-          <motion.div key={i} initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.5}}
-            className="rounded-2xl border p-6 bg-white shadow-sm">
-            <h3 className="text-xl font-semibold">{f.title}</h3>
-            <p className="mt-2 text-zinc-600 text-sm">{f.desc}</p>
-          </motion.div>
-        ))}
-      </div>
-    </Container>
-  </section>
-);
+// const Values: React.FC = () => (
+//   <section id="values" className="py-16">
+//     <Container>
+//       <div className="grid md:grid-cols-3 gap-6">
+//         {[{
+//           title: "Clean & Conscious",
+//           desc: "IFRA-compliant formulas. No parabens, phthalates or dyes.",
+//         },{
+//           title: "Cruelty‑free & Vegan",
+//           desc: "Never tested on animals. 100% vegan ingredients.",
+//         },{
+//           title: "Transparent Pricing",
+//           desc: "Luxury quality without the luxury markup.",
+//         }].map((f, i) => (
+//           <motion.div key={i} initial={{opacity:0, y:20}} whileInView={{opacity:1, y:0}} viewport={{once:true}} transition={{duration:0.5}}
+//             className="rounded-2xl border p-6 bg-white shadow-sm">
+//             <h3 className="text-xl font-semibold">{f.title}</h3>
+//             <p className="mt-2 text-zinc-600 text-sm">{f.desc}</p>
+//           </motion.div>
+//         ))}
+//       </div>
+//     </Container>
+//   </section>
+// );
 
 // ---------- Reviews (simple auto-play carousel) ----------
-const reviews = [
-  { name: "Aisha", text: "Smells just like my favorite designer scent, but lighter & cleaner.", rating: 5 },
-  { name: "Rohan", text: "The discovery set helped me lock my signature. Huge fan!", rating: 5 },
-  { name: "Meera", text: "Great longevity for the price. Compliments every time.", rating: 4 },
-];
+// const reviews = [
+//   { name: "Aisha", text: "Smells just like my favorite designer scent, but lighter & cleaner.", rating: 5 },
+//   { name: "Rohan", text: "The discovery set helped me lock my signature. Huge fan!", rating: 5 },
+//   { name: "Meera", text: "Great longevity for the price. Compliments every time.", rating: 4 },
+// ];
 
-const Reviews: React.FC = () => {
-  const [idx, setIdx] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setIdx(i => (i+1) % reviews.length), 3500);
-    return () => clearInterval(t);
-  }, []);
-  const r = reviews[idx];
-  return (
-    <section id="reviews" className="py-16 bg-zinc-50">
-      <Container>
-        <h2 className="text-3xl md:text-4xl font-bold text-center">Loved by scent lovers</h2>
-        <div className="mx-auto mt-8 max-w-2xl rounded-2xl border bg-white p-6 text-center shadow-sm">
-          <div className="flex justify-center gap-1 text-amber-500 mb-2">
-            {Array.from({length:r.rating}).map((_,i)=>(<Star key={i} size={18} fill="currentColor"/>))}
-          </div>
-          <p className="text-lg">“{r.text}”</p>
-          <p className="mt-2 text-sm text-zinc-600">— {r.name}</p>
-        </div>
-      </Container>
-    </section>
-  );
-};
+// const Reviews: React.FC = () => {
+//   const [idx, setIdx] = useState(0);
+//   useEffect(() => {
+//     const t = setInterval(() => setIdx(i => (i+1) % reviews.length), 3500);
+//     return () => clearInterval(t);
+//   }, []);
+//   const r = reviews[idx];
+//   return (
+//     <section id="reviews" className="py-16 bg-zinc-50">
+//       <Container>
+//         <h2 className="text-3xl md:text-4xl font-bold text-center">Loved by scent lovers</h2>
+//         <div className="mx-auto mt-8 max-w-2xl rounded-2xl border bg-white p-6 text-center shadow-sm">
+//           <div className="flex justify-center gap-1 text-amber-500 mb-2">
+//             {Array.from({length:r.rating}).map((_,i)=>(<Star key={i} size={18} fill="currentColor"/>))}
+//           </div>
+//           <p className="text-lg">“{r.text}”</p>
+//           <p className="mt-2 text-sm text-zinc-600">— {r.name}</p>
+//         </div>
+//       </Container>
+//     </section>
+//   );
+// };
 
 // ---------- Footer ----------
 const Footer: React.FC = () => (
